@@ -62,14 +62,14 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
     {
-        Debug.Log("Jump");
+        //Debug.Log("Jump");
         if (isGrounded())
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
             rb.AddForce(Vector3.up * jumpPower);
             animator.SetTrigger("Jump");
         }
-        else if (onWall() && !isGrounded())
+        /*else if (onWall() && !isGrounded())
         {
             if (horizontalInput == 0)
             {
@@ -81,13 +81,13 @@ public class PlayerMovement : MonoBehaviour
                 rb.linearVelocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
             }
             wallJumpCooldown = 0;
-        }
+        }*/
     }
     private bool isGrounded()
     {
         bool raycastHit = Physics.Raycast(boxCollider.bounds.center, Vector3.down, 3.8f, groundLayer);
         //Debug.Log(raycastHit);
-        Debug.DrawLine(boxCollider.bounds.center, boxCollider.bounds.center + Vector3.down * 3.8f);
+        //Debug.DrawLine(boxCollider.bounds.center, boxCollider.bounds.center + Vector3.down * 3.8f);
         return raycastHit;
     }
    
