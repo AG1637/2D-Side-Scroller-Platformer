@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    private Rigidbody rb;
     private Animator animator;
-    private BoxCollider2D boxCollider;
+    private SpriteRenderer sprite;
+    private BoxCollider boxCollider;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     public float speed;
@@ -16,9 +17,10 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         //References from gameobject
-        rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        boxCollider = GetComponent<BoxCollider2D>();
+        boxCollider = GetComponent<BoxCollider>();
+        sprite = GetComponent<SpriteRenderer>();
     }
     private void Update()
     {
@@ -26,11 +28,11 @@ public class PlayerMovement : MonoBehaviour
         //changes the direction the player is facing
         if (horizontalInput > 0.01f) // Facing right
         {
-            transform.localScale = new Vector3(4, 4, 4);
+            sprite.flipX = false;
         }
         else if (horizontalInput < -0.01f) //Facing left
         {
-            transform.localScale = new Vector3(-4, 4, 4);
+            sprite.flipX = true;
         }
 
         //used for changing animations between idle and running
@@ -42,12 +44,11 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
             if (onWall() && !isGrounded())
             {
-                rb.gravityScale = 0;
                 rb.linearVelocity = Vector2.zero;
             }
             else
             {
-                rb.gravityScale = 3;
+                //rb.AddForce(Vector3.up * jumpPower);
             }
             if (Input.GetKey(KeyCode.Space))
             {
@@ -61,9 +62,11 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Jump()
     {
+        Debug.Log("Jump");
         if (isGrounded())
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            rb.AddForce(Vector3.up * jumpPower);
             animator.SetTrigger("Jump");
         }
         else if (onWall() && !isGrounded())
@@ -82,14 +85,17 @@ public class PlayerMovement : MonoBehaviour
     }
     private bool isGrounded()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0 , Vector2.down, 0.1f, groundLayer);
-        return raycastHit.collider != null;
+        bool raycastHit = Physics.Raycast(boxCollider.bounds.center, Vector3.down, 3.8f, groundLayer);
+        //Debug.Log(raycastHit);
+        Debug.DrawLine(boxCollider.bounds.center, boxCollider.bounds.center + Vector3.down * 3.8f);
+        return raycastHit;
     }
+   
 
     private bool onWall()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector2(transform.localScale.x,0), 0.1f, wallLayer);
-        return raycastHit.collider != null;
+        //bool raycastHit = Physics.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, new Vector3(transform.localScale.x,0), 0.1f, wallLayer);
+        return false;
     }
 
 }
