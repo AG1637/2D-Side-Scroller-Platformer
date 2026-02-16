@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(Vector3.up * jumpPower);
             animator.SetTrigger("Jump");
         }
-        /*else if (onWall() && !isGrounded())
+        else if (onWall() && !isGrounded())
         {
             if (horizontalInput == 0)
             {
@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.linearVelocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
             }
             wallJumpCooldown = 0;
-        }*/
+        }
     }
     private bool isGrounded()
     {
