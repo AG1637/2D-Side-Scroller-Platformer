@@ -13,11 +13,15 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float jumpPower;
     private float horizontalInput;
+    //public float gravity;
 
     [Header("Wall Jumping")]
     public bool onWall;
     bool isSliding;
     public float wallSlidingSpeed;
+    public float wallJumpDuration;
+    public Vector2 wallJumpForce;
+    bool wallJumping;
 
     private void Awake()
     {
@@ -29,14 +33,24 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        Movement();
+        //increaseGravity();
+        movement();
         isOnWall(); //checks if player is touching wall and returns 'onwall' as true or false
+        //Debug.Log("wall jump: " + wallJumping);
+        //Debug.Log("issliding: " + isSliding);
         if (Input.GetKey(KeyCode.Space))
         {
             if (onGround == true)
             {
                 Jump();
             }
+            if (isSliding == true)
+            {
+                wallJumping = true;
+                rb.linearVelocity = new Vector2(-horizontalInput * wallJumpForce.x, wallJumpForce.y);
+                Invoke("StopWallJumping", wallJumpDuration);
+            }
+
         }
         if(onWall && !onGround && horizontalInput != 0)
         {
@@ -47,11 +61,10 @@ public class PlayerMovement : MonoBehaviour
         {
             isSliding = false;
         }
-        
     }
 
 
-    public void Movement()
+    public void movement()
     {
         horizontalInput = Input.GetAxis("Horizontal");
         //changes the direction the player is facing
@@ -76,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded())
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+            rb.linearVelocity = new Vector2(0, jumpPower);
             rb.AddForce(Vector3.up * jumpPower);
             animator.SetTrigger("Jump");
         }
@@ -90,9 +103,16 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 rb.linearVelocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
-            };
+            }
         }
+
     }
+
+    void StopWallJumping()
+    {
+        wallJumping = false;
+    }
+
     private bool isGrounded()
     {
         bool raycastHitGround = Physics.Raycast(boxCollider.bounds.center, Vector3.down, 3.8f, groundLayer);
@@ -120,4 +140,13 @@ public class PlayerMovement : MonoBehaviour
 
         }
     }
+
+    /*private void increaseGravity()
+    {
+        Physics.gravity = new Vector3(0, -gravity, 0);
+        while (!onGround)
+        {
+            gravity -= 1;
+        }
+    }*/
 }
