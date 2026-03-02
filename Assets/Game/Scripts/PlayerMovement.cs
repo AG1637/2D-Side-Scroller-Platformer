@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private PlayerMovement instance;
     private Rigidbody rb;
     private Animator animator;
     private SpriteRenderer sprite;
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         //References from gameobject
+        instance = this;
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
