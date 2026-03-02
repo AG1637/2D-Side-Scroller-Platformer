@@ -21,6 +21,16 @@ public class Projectile : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
         spawnTime = Time.time;
+        if (PlayerMovement.instance.movingLeft == true)
+        {
+            //transform.Translate(Vector3.left * speed * Time.deltaTime);
+            rb.AddForce(transform.right * force);
+        }
+        else
+        {
+            //transform.Translate(Vector3.right * speed * Time.deltaTime);
+            rb.AddForce(transform.right * force);
+        }
     }
     private void Update()
     {
@@ -30,16 +40,6 @@ public class Projectile : MonoBehaviour
         }
 
         lifetime += Time.deltaTime;
-        if (PlayerMovement.instance.movingLeft == true)
-        {
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
-            //rb.AddForce(transform.right * force);
-        }
-        else
-        {
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
-            //rb.AddForce(transform.right * force);
-        }
         if (lifetime > 5)
         {
             Destroy(gameObject); 

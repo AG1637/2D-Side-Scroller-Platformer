@@ -172,4 +172,13 @@ public class PlayerMovement : MonoBehaviour
     {
         return isGrounded() && !onWall();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Collectible"))
+        {
+            Destroy(other.gameObject);
+            GameManager.instance.coins ++;
+        }
+    }
 }

@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 30
   lifetime: 0
-  force: -234.5
+  force: 100
   damage: 0
   hitEffectPrefab: {fileID: 0}
 --- !u!65 &3275652353372610972
