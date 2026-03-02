@@ -1,20 +1,32 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerAttack : MonoBehaviour
 {
     public float attackCooldown;
     public Transform firePoint;
-    public GameObject[] bullets;
-    //[SerializeField] private AudioClip fireballSound;
+    public ProjectilePool bulletPool;
+    public GameObject shootEffect;
+    public AudioClip shootSound;
+    public AudioSource audioSource;
 
     private Animator anim;
     private PlayerMovement playerMovement;
     private float cooldownTimer = Mathf.Infinity;
 
+    public void Initialize(ProjectilePool pool)
+    {
+        bulletPool = pool;
+    }
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
+        if (bulletPool == null)
+        {
+            bulletPool = FindFirstObjectByType<ProjectilePool>();
+        }
     }
 
     private void Update()
@@ -29,21 +41,20 @@ public class PlayerAttack : MonoBehaviour
 
     private void Attack()
     {
-        //SoundManager.instance.PlaySound(bulletSound);
         anim.SetTrigger("attack");
         cooldownTimer = 0;
-
-        bullets[FindBullet()].transform.position = firePoint.position;
-        bullets[FindBullet()].GetComponent<Projectile>().SetDirection(Mathf.Sign(transform.localScale.x));
-    }
-
-    private int FindBullet()
-    {
-        for (int i = 0; i < bullets.Length; i++)
+        if (bulletPool == null || firePoint == null)
         {
-            if (!bullets[i].activeInHierarchy)
-                return i;
+            return;
         }
-        return 0;
+        var projGO = bulletPool.Spawn(firePoint.position, firePoint.rotation);
+        if (shootEffect != null)
+        {
+            Instantiate(shootEffect, transform.position, Quaternion.identity);
+        }
+        if (shootSound != null)
+        {
+            audioSource.PlayOneShot(shootSound);
+        }
     }
 }

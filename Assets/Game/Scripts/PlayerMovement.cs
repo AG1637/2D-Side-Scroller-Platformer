@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private PlayerMovement instance;
+    public static PlayerMovement instance;
     private Rigidbody rb;
     private Animator animator;
     private SpriteRenderer sprite;
@@ -170,6 +170,6 @@ public class PlayerMovement : MonoBehaviour
     }
     public bool canAttack()
     {
-        return horizontalInput == 0 && isGrounded() && !onWall();
+        return isGrounded() && !onWall();
     }
 }
