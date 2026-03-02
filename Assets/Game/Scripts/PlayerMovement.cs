@@ -6,22 +6,29 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private SpriteRenderer sprite;
     private BoxCollider boxCollider;
+    [SerializeField] private AudioClip jumpSound;
+
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
+
     public bool movingLeft;
-    public bool onGround;
+    public float gravityScale = 3f;
     public float speed;
-    public float jumpPower;
     private float horizontalInput;
-    //public float gravity;
+
+    [Header("Jumping")]
+    public float jumpPower;
+    public bool onGround;
+    [SerializeField] private float coyoteTime;
+    private float coyoteCounter;
+    [SerializeField] private int extraJumps;
+    private int jumpCounter;
 
     [Header("Wall Jumping")]
-    public bool onWall;
-    bool isSliding;
-    public float wallSlidingSpeed;
+    public bool isOnWall;
     public float wallJumpDuration;
     public Vector2 wallJumpForce;
-    bool wallJumping;
+    //private float wallJumpCooldown;
 
     private void Awake()
     {
@@ -30,39 +37,43 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
         sprite = GetComponent<SpriteRenderer>();
+        rb.useGravity = false;
     }
     private void Update()
     {
-        //increaseGravity();
+        Vector3 customGravity = Physics.gravity * gravityScale;
+        rb.AddForce(customGravity, ForceMode.Acceleration);
         movement();
-        isOnWall(); //checks if player is touching wall and returns 'onwall' as true or false
-        //Debug.Log("wall jump: " + wallJumping);
-        //Debug.Log("issliding: " + isSliding);
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (onGround == true)
-            {
-                Jump();
-            }
-            if (isSliding == true)
-            {
-                wallJumping = true;
-                rb.linearVelocity = new Vector2(-horizontalInput * wallJumpForce.x, wallJumpForce.y);
-                Invoke("StopWallJumping", wallJumpDuration);
-            }
-
+            Jump();
         }
-        if(onWall && !onGround && horizontalInput != 0)
+
+        //Adjustable jump height
+        if (Input.GetKeyUp(KeyCode.Space) && rb.linearVelocity.y > 0)
         {
-            isSliding = true;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -wallSlidingSpeed, float.MaxValue));
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y / 2);
+        }
+
+        if (onWall())
+        {
+            gravityScale = 0;
+            rb.linearVelocity = Vector2.zero;
         }
         else
         {
-            isSliding = false;
+            gravityScale = 2.5f;
+            rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
+
+            if (isGrounded())
+            {
+                coyoteCounter = coyoteTime; //Reset coyote counter when on the ground
+                jumpCounter = extraJumps; //Reset jump counter to extra jump value
+            }
+            else
+                coyoteCounter -= Time.deltaTime; //Start decreasing coyote counter when not on the ground
         }
     }
-
 
     public void movement()
     {
@@ -80,37 +91,53 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //used for changing animations between idle and running
-        animator.SetBool("Running?", horizontalInput != 0);
-        animator.SetBool("Grounded?", isGrounded());
+        animator.SetBool("run", horizontalInput != 0);
+        animator.SetBool("grounded", isGrounded());
         rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
     }
 
     private void Jump()
     {
-        if (isGrounded())
+        if (coyoteCounter <= 0 && !onWall() && jumpCounter <= 0)
         {
-            rb.linearVelocity = new Vector2(0, jumpPower);
-            rb.AddForce(Vector3.up * jumpPower);
-            animator.SetTrigger("Jump");
+            return;
+        }
+
+        SoundManager.instance.PlaySound(jumpSound);
+
+        if (onWall())
+        {
+            WallJump();
         }
         else
         {
-            if (horizontalInput == 0)
+            if (isGrounded())
             {
-                rb.linearVelocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
-                transform.localScale = new Vector3(-Mathf.Sign(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
             }
             else
             {
-                rb.linearVelocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
+                //If not on the ground and coyote counter bigger than 0 do a normal jump
+                if (coyoteCounter > 0)
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+                else
+                {
+                    if (jumpCounter > 0) //If we have extra jumps then jump and decrease the jump counter
+                    {
+                        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
+                        jumpCounter--;
+                    }
+                }
             }
-        }
 
+            coyoteCounter = 0;
+        }
     }
 
-    void StopWallJumping()
+    private void WallJump()
     {
-        wallJumping = false;
+        rb.AddForce(wallJumpForce);
+        //wallJumpCooldown = 0;
     }
 
     private bool isGrounded()
@@ -121,32 +148,26 @@ public class PlayerMovement : MonoBehaviour
         onGround = raycastHitGround;
         return raycastHitGround;
     }
-
-    private bool isOnWall()
+    private bool onWall()
     {
         if (movingLeft == true)
         {
             bool raycastHitWallLeft = Physics.Raycast(boxCollider.bounds.center - new Vector3(0f, 2f, 0f), Vector3.left, 3f, wallLayer);
             //Debug.DrawLine(boxCollider.bounds.center - new Vector3(0f, 2f, 0f), boxCollider.bounds.center + Vector3.left * 3f);
-            onWall = raycastHitWallLeft;
+            isOnWall = raycastHitWallLeft;
             return raycastHitWallLeft;
         }
         else
         {
             bool raycastHitWallRight = Physics.Raycast(boxCollider.bounds.center - new Vector3(0f, 2f, 0f), Vector3.right, 3f, wallLayer);
             //Debug.DrawLine(boxCollider.bounds.center - new Vector3(0f, 2f, 0f), boxCollider.bounds.center + Vector3.right * 3f);
-            onWall = raycastHitWallRight;
+            isOnWall = raycastHitWallRight;
             return raycastHitWallRight;
 
         }
     }
-
-    /*private void increaseGravity()
+    public bool canAttack()
     {
-        Physics.gravity = new Vector3(0, -gravity, 0);
-        while (!onGround)
-        {
-            gravity -= 1;
-        }
-    }*/
+        return horizontalInput == 0 && isGrounded() && !onWall();
+    }
 }
