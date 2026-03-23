@@ -8,7 +8,7 @@ public class SceneManager2 : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     private int index;
 
-    private void Start()
+    private void Awake()
     {
         instance = this;
     }
