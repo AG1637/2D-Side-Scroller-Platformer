@@ -51,8 +51,8 @@ public class PlayerMovement : MonoBehaviour
             Jump();
         }
 
-        //Adjustable jump height
-        if (Input.GetKeyUp(KeyCode.Space) && rb.linearVelocity.y > 0)
+        //Adjustable jump height   
+        if ((Input.GetKeyUp(KeyCode.Space) && rb.linearVelocity.y > 0) || (Input.GetKeyUp(KeyCode.W) && rb.linearVelocity.y > 0) || (Input.GetKeyUp(KeyCode.UpArrow) && rb.linearVelocity.y > 0))
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y / 2);
         }
