@@ -4,7 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class SceneManager2 : MonoBehaviour
 {
+    public static SceneManager2 instance;
     [SerializeField] GameObject pauseMenu;
+    private int index;
+
+    private void Start()
+    {
+        instance = this;
+    }
 
     public void Pause()
     {
@@ -36,5 +43,11 @@ public class SceneManager2 : MonoBehaviour
     {
         Application.Quit();
         EditorApplication.ExitPlaymode();
+    }
+
+    public void LoadNextLevel()
+    {
+        index = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(index + 1);
     }
 }

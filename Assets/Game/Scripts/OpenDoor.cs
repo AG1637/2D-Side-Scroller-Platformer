@@ -8,11 +8,16 @@ public class OpenDoor : MonoBehaviour
     public int requiredCoins;
     public int requiredEnemies;
 
+    public GameObject portal;
     public GameObject lockedTextCoins;
     public GameObject lockedTextEnemies;
     public GameObject unlockedTextCoins;
     public GameObject unlockedTextEnemies;
 
+    private void Start()
+    {
+        portal.SetActive(false);
+    }
     private void Update()
     {
         if (coins == true)
@@ -21,7 +26,7 @@ public class OpenDoor : MonoBehaviour
             {
                 GameManager.instance.canEnterNextLevel = true;
                 unlockedTextCoins.SetActive(true);
-                //unlock portal
+                portal.SetActive(true);
             }        
         }
         else if (enemies == true)
@@ -30,11 +35,11 @@ public class OpenDoor : MonoBehaviour
             {
                 GameManager.instance.canEnterNextLevel = true;
                 unlockedTextEnemies.SetActive(true);
-                //unlock portal
+                portal.SetActive(true);
             }
         }
     }
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         if (coins == true)
         {

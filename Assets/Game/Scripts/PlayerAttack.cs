@@ -31,6 +31,12 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameManager.instance.enemiesKilled++;
+        }
+
         if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown && playerMovement.canAttack())
         {
             Attack();
