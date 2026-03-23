@@ -3496,7 +3496,7 @@ MonoBehaviour:
   movingLeft: 0
   gravityScale: 2.5
   speed: 25
-  jumpPower: 65
+  jumpPower: 50
   onGround: 0
   coyoteTime: 0.25
   extraJumps: 1
