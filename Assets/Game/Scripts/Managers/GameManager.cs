@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject gameOverScreen;
     public TextMeshProUGUI coinText;
+    public TextMeshProUGUI enemyText;
 
     void Start()
     {
@@ -22,14 +23,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         coinText.text = "Coins: " + coins;
-        if(playerHealth <= 0)
+        enemyText.text = "Enemies Killed: " + enemiesKilled;
+        if (playerHealth <= 0)
         {
             Time.timeScale = 0;
             gameOverScreen.SetActive(true);
         }
-        /*if (canEnterNextLevel == true)
-        {
-            Debug.Log("next level");
-        }*/
+
     }
 }

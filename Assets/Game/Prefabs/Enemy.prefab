@@ -40,9 +40,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5662555000101032932}
+  - component: {fileID: 6465444965176825394}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,7 +57,7 @@ Transform:
   m_GameObject: {fileID: 5030326300639663006}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 53.40489, y: 15.24, z: -10.094718}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.4673, y: 2.4673, z: 2.4673}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -65,6 +66,23 @@ Transform:
   - {fileID: 610283984477369408}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6465444965176825394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5030326300639663006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4285044fc33bc44da85a7c92e3903ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 7829510957001724987}
+  pointA: {fileID: 5037559944395019859}
+  pointB: {fileID: 610283984477369408}
+  speed: 5
+  health: 3
 --- !u!1 &7939389904186663440
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,11 +94,10 @@ GameObject:
   - component: {fileID: 7829510957001724987}
   - component: {fileID: 46980604717646970}
   - component: {fileID: 4834102837700564670}
-  - component: {fileID: 507915210250340926}
-  - component: {fileID: 5205284957529406943}
+  - component: {fileID: 6749525276250149745}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +170,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &507915210250340926
+--- !u!136 &6749525276250149745
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,21 +193,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5205284957529406943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7939389904186663440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4285044fc33bc44da85a7c92e3903ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pointA: {fileID: 5037559944395019859}
-  pointB: {fileID: 610283984477369408}
-  speed: 5
 --- !u!1 &8775387665779238409
 GameObject:
   m_ObjectHideFlags: 0

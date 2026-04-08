@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
     [Header("Bullet Stats")]
     public float speed = 30;
     private bool hit;
     public float lifetime;
-    public float force;
+    public float force = 20f;
     public float damage;
     private float spawnTime;
 
@@ -21,26 +21,15 @@ public class Projectile : MonoBehaviour
         boxCollider = GetComponent<BoxCollider>();
         rb = GetComponent<Rigidbody>();
         spawnTime = Time.time;
-        if (PlayerMovement.instance.movingLeft == true)
-        {
-            //transform.Translate(Vector3.left * speed * Time.deltaTime);
-            rb.AddForce(transform.right * force);
-        }
-        else
-        {
-            //transform.Translate(Vector3.right * speed * Time.deltaTime);
-            rb.AddForce(transform.right * force);
-        }
+
+        rb.useGravity = false;
+        Vector3 shootDirection = PlayerMovement.instance.movingLeft ? Vector3.left : Vector3.right;
+        rb.linearVelocity = shootDirection * force;
     }
     private void Update()
     {
-        if (hit)
-        {
-            return;
-        }
-
         lifetime += Time.deltaTime;
-        if (lifetime > 5)
+        if (lifetime > 3)
         {
             Destroy(gameObject); 
         }
@@ -48,16 +37,20 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             return;
         }
-        hit = true;
-        boxCollider.enabled = false;
-        Destroy(gameObject);
+
         if (collision.tag == "Enemy")
         {
-            //collision.GetComponent<Health>()?.TakeDamage(1);
+            Debug.Log("Hit Enemy");
+            Enemy enemy = collision.GetComponentInParent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(1);
+            }
         }
+        Destroy(gameObject);
     }
 }

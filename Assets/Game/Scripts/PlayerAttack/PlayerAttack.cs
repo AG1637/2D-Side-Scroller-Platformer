@@ -5,7 +5,7 @@ public class PlayerAttack : MonoBehaviour
 {
     public float attackCooldown;
     public Transform firePoint;
-    public ProjectilePool bulletPool;
+    public GameObject bulletPrefab;
     public GameObject shootEffect;
     public AudioClip shootSound;
     public AudioSource audioSource;
@@ -14,24 +14,14 @@ public class PlayerAttack : MonoBehaviour
     private PlayerMovement playerMovement;
     private float cooldownTimer = Mathf.Infinity;
 
-    public void Initialize(ProjectilePool pool)
-    {
-        bulletPool = pool;
-    }
-
     private void Awake()
     {
         anim = GetComponent<Animator>();
         playerMovement = GetComponent<PlayerMovement>();
-        if (bulletPool == null)
-        {
-            bulletPool = FindFirstObjectByType<ProjectilePool>();
-        }
     }
 
     private void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.P))
         {
             GameManager.instance.enemiesKilled++;
@@ -49,15 +39,20 @@ public class PlayerAttack : MonoBehaviour
     {
         anim.SetTrigger("attack");
         cooldownTimer = 0;
-        if (bulletPool == null || firePoint == null)
+
+        if (bulletPrefab == null || firePoint == null)
         {
             return;
         }
-        var projGO = bulletPool.Spawn(firePoint.position, firePoint.rotation);
+
+        // Instantiate a new bullet at the firePoint position
+        GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+
         if (shootEffect != null)
         {
-            Instantiate(shootEffect, transform.position, Quaternion.identity);
+            Instantiate(shootEffect, firePoint.position, Quaternion.identity);
         }
+
         if (shootSound != null)
         {
             audioSource.PlayOneShot(shootSound);
