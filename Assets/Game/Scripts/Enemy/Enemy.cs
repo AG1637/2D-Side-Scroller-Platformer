@@ -4,7 +4,8 @@ public class Enemy : MonoBehaviour
 {
     public Transform enemy, pointA, pointB;
     public float speed;
-    public int health;
+    public int maxHealth = 3;
+    public int health = 3;
     Vector3 targetPoint;
 
     private void Start()

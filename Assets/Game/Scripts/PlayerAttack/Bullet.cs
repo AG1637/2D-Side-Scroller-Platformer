@@ -44,7 +44,7 @@ public class Bullet : MonoBehaviour
 
         if (collision.tag == "Enemy")
         {
-            Debug.Log("Hit Enemy");
+            //Debug.Log("Hit Enemy");
             Enemy enemy = collision.GetComponentInParent<Enemy>();
             if (enemy != null)
             {

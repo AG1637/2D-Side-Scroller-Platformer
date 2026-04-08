@@ -134,7 +134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &17834092
 Transform:
   m_ObjectHideFlags: 0
@@ -6838,7 +6838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1971473005
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7427,11 +7427,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2613488583970608405, guid: c7c9f9dc2645ad14da6e8d01789e4375, type: 3}
       propertyPath: coins
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2613488583970608405, guid: c7c9f9dc2645ad14da6e8d01789e4375, type: 3}
       propertyPath: enemies
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2613488583970608405, guid: c7c9f9dc2645ad14da6e8d01789e4375, type: 3}
       propertyPath: requiredCoins
@@ -7443,7 +7443,7 @@ PrefabInstance:
       objectReference: {fileID: 304327590}
     - target: {fileID: 2613488583970608405, guid: c7c9f9dc2645ad14da6e8d01789e4375, type: 3}
       propertyPath: requiredEnemies
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2613488583970608405, guid: c7c9f9dc2645ad14da6e8d01789e4375, type: 3}
       propertyPath: lockedTextEnemies
