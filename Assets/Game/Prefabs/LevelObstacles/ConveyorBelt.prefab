@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 73494528075933527}
   - component: {fileID: 3424791801328637959}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Arrows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,4 +362,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conveyorDirection: {x: -1, y: 0, z: 0}
   conveyorSpeed: 5
-  text: {fileID: 2207214350964914572}
+  arrows: {fileID: 2207214350964914572}

@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class ConveyorBelt : MonoBehaviour
+public class Conveyorbelt : MonoBehaviour
 {
     [SerializeField] private Vector3 conveyorDirection = Vector3.right; //direction (positive is right, negative is left)
     [SerializeField] private float conveyorSpeed = 5f;
-    [SerializeField] private GameObject text;
+    [SerializeField] private GameObject arrows;
 
     private BoxCollider boxCollider;
-    private Rigidbody playerRb;
+    private Rigidbody rb;
     private PlayerMovement playerMovement;
     private bool isPlayerOnBelt = false;
 
@@ -21,7 +21,7 @@ public class ConveyorBelt : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.GetComponent<PlayerMovement>() != null)
         {
-            playerRb = collision.gameObject.GetComponent<Rigidbody>();
+            rb = collision.gameObject.GetComponent<Rigidbody>();
             playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
             isPlayerOnBelt = true;
         }
@@ -39,17 +39,17 @@ public class ConveyorBelt : MonoBehaviour
     {
         if (conveyorDirection.x < 0)
         {
-            text.transform.rotation = Quaternion.Euler(0, 180, 0); //arrows point left
+            arrows.transform.rotation = Quaternion.Euler(0, 180, 0); //arrows point left
         }
         else if (conveyorDirection.x > 0)
         {
-            text.transform.rotation = Quaternion.Euler(0, 0, 0); //arrows point right
+            arrows.transform.rotation = Quaternion.Euler(0, 0, 0); //arrows point right
         }
         
-        if (isPlayerOnBelt && playerRb != null && playerMovement != null) 
+        if (isPlayerOnBelt && rb != null && playerMovement != null) 
         { 
             Vector3 conveyorVelocity = conveyorDirection.normalized * conveyorSpeed;
-            playerRb.linearVelocity = new Vector3(conveyorVelocity.x, playerRb.linearVelocity.y, conveyorVelocity.z);
+            rb.linearVelocity = new Vector3(conveyorVelocity.x, rb.linearVelocity.y, conveyorVelocity.z);
         }
     }
 
