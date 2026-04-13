@@ -3,7 +3,8 @@ using UnityEngine;
 public class ConveyorBelt : MonoBehaviour
 {
     [SerializeField] private Vector3 conveyorDirection = Vector3.right; //direction (positive is right, negative is left)
-    [SerializeField] private float conveyorSpeed = 5f;                
+    [SerializeField] private float conveyorSpeed = 5f;
+    [SerializeField] private GameObject text;
 
     private BoxCollider boxCollider;
     private Rigidbody playerRb;
@@ -36,6 +37,15 @@ public class ConveyorBelt : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (conveyorDirection.x < 0)
+        {
+            text.transform.rotation = Quaternion.Euler(0, 180, 0); //arrows point left
+        }
+        else if (conveyorDirection.x > 0)
+        {
+            text.transform.rotation = Quaternion.Euler(0, 0, 0); //arrows point right
+        }
+        
         if (isPlayerOnBelt && playerRb != null && playerMovement != null) 
         { 
             Vector3 conveyorVelocity = conveyorDirection.normalized * conveyorSpeed;

@@ -41,20 +41,23 @@ public class OpenDoor : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (coins == true)
-        {
-            if (GameManager.instance.coins < requiredCoins)
+        if (other.CompareTag("Player"))
+        {            
+            if (coins == true)
             {
-                lockedTextCoins.SetActive(true);
-                Invoke("HideText", 5);
+                if (GameManager.instance.coins < requiredCoins)
+                {
+                    lockedTextCoins.SetActive(true);
+                    Invoke("HideText", 5);
+                }
             }
-        }
-        else if (enemies == true)
-        {
-            if (GameManager.instance.enemiesKilled < requiredEnemies)
+            else if (enemies == true)
             {
-                lockedTextEnemies.SetActive(true);
-                Invoke("HideText", 5);
+                if (GameManager.instance.enemiesKilled < requiredEnemies)
+                {
+                    lockedTextEnemies.SetActive(true);
+                    Invoke("HideText", 5);
+                }
             }
         }
     }
