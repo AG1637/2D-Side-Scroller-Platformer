@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 public class SceneManager2 : MonoBehaviour
 {
     public static SceneManager2 instance;
-    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject pausePanel;
+    [SerializeField] GameObject helpPanel;
     private int index;
 
     private void Awake()
@@ -15,7 +16,12 @@ public class SceneManager2 : MonoBehaviour
 
     public void Pause()
     {
-        pauseMenu.SetActive(true);
+        pausePanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void Help()
+    {
+        helpPanel.SetActive(true);
         Time.timeScale = 0;
     }
     public void StartGame()
@@ -30,7 +36,8 @@ public class SceneManager2 : MonoBehaviour
 
     public void Resume()
     {
-        pauseMenu.SetActive(false);
+        pausePanel.SetActive(false);
+        helpPanel.SetActive(false);
         Time.timeScale = 1;
     }
 
