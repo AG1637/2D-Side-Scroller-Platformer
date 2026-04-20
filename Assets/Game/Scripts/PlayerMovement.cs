@@ -106,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         SoundManager.instance.PlaySound(jumpSound);
+        animator.SetTrigger("jump");
 
         if (onWall())
         {
