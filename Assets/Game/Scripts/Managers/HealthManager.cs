@@ -34,6 +34,5 @@ public class HealthManager : MonoBehaviour
             heart2.GetComponent<Image>().color = new Color(heart1.color.r, heart1.color.g, heart1.color.b, 0);
             heart3.GetComponent<Image>().color = new Color(heart1.color.r, heart1.color.g, heart1.color.b, 0);
         }
-
     }
 }

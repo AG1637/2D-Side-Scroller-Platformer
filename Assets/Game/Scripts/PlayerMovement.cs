@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
 
+    public GameObject enemyHitText;
+
     public bool movingLeft;
     public float gravityScale = 3f;
     public float speed;
@@ -145,9 +147,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isGrounded()
     {
-        bool raycastHitGround = Physics.Raycast(boxCollider.bounds.center, Vector3.down, 3.8f, groundLayer);
+        bool raycastHitGround = Physics.Raycast(boxCollider.bounds.center, Vector3.down, 5.5f, groundLayer);
         //Debug.Log(raycastHitGround);
-        //Debug.DrawLine(boxCollider.bounds.center, boxCollider.bounds.center + Vector3.down * 3.8f);
+        //Debug.DrawLine(boxCollider.bounds.center, boxCollider.bounds.center + Vector3.down * 5.5f);
         onGround = raycastHitGround;
         return raycastHitGround;
     }
@@ -155,15 +157,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (movingLeft == true)
         {
-            bool raycastHitWallLeft = Physics.Raycast(boxCollider.bounds.center - new Vector3(0f, 2f, 0f), Vector3.left, 3f, wallLayer);
-            //Debug.DrawLine(boxCollider.bounds.center - new Vector3(0f, 2f, 0f), boxCollider.bounds.center + Vector3.left * 3f);
+            bool raycastHitWallLeft = Physics.Raycast(boxCollider.bounds.center - new Vector3(0f, 2f, 0f), Vector3.left, 5f, wallLayer);
+            //Debug.DrawLine(boxCollider.bounds.center - new Vector3(0f, 2f, 0f), boxCollider.bounds.center + Vector3.left * 5f);
             isOnWall = raycastHitWallLeft;
             return raycastHitWallLeft;
         }
         else
         {
-            bool raycastHitWallRight = Physics.Raycast(boxCollider.bounds.center - new Vector3(0f, 2f, 0f), Vector3.right, 3f, wallLayer);
-            //Debug.DrawLine(boxCollider.bounds.center - new Vector3(0f, 2f, 0f), boxCollider.bounds.center + Vector3.right * 3f);
+            bool raycastHitWallRight = Physics.Raycast(boxCollider.bounds.center - new Vector3(0f, 2f, 0f), Vector3.right, 5f, wallLayer);
+            //Debug.DrawLine(boxCollider.bounds.center - new Vector3(0f, 2f, 0f), boxCollider.bounds.center + Vector3.right * 5f);
             isOnWall = raycastHitWallRight;
             return raycastHitWallRight;
 
@@ -181,5 +183,16 @@ public class PlayerMovement : MonoBehaviour
             Destroy(other.gameObject);
             GameManager.instance.coins ++;
         }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            GameManager.instance.playerHealth--;
+            enemyHitText.SetActive(true);
+            Invoke("HideText", 3);
+        }
+    }
+
+    public void HideText()
+    {
+        enemyHitText.SetActive(false);
     }
 }

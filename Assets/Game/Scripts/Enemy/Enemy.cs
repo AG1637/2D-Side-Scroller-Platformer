@@ -28,14 +28,6 @@ public class Enemy : MonoBehaviour
         enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, targetPoint, speed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        { 
-            GameManager.instance.playerHealth--;
-        }
-    }
-
     public void TakeDamage(int damage)
     {
         health -= damage;

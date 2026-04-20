@@ -5,14 +5,12 @@ using Unity.VisualScripting;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int coins;
     public int playerHealth = 3;
+    public int coins;
     public int enemiesKilled;
     public bool canEnterNextLevel;
 
     public GameObject gameOverScreen;
-    public TextMeshProUGUI coinText;
-    public TextMeshProUGUI enemyText;
 
     void Start()
     {
@@ -22,8 +20,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        coinText.text = "Coins: " + coins;
-        enemyText.text = "Enemies Killed: " + enemiesKilled;
         if (playerHealth <= 0)
         {
             Time.timeScale = 0;
