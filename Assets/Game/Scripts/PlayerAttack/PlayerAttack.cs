@@ -45,6 +45,11 @@ public class PlayerAttack : MonoBehaviour
             return;
         }
 
+        Invoke("CreateBullet", 0.5f);
+    }
+
+    private void CreateBullet()
+    {
         // Instantiate a new bullet at the firePoint position
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 

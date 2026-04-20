@@ -450,7 +450,7 @@ Transform:
   m_GameObject: {fileID: 49530390}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.002, y: -0.589, z: 0.262}
+  m_LocalPosition: {x: 0.64, y: 0.346, z: 0.262}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1452,8 +1452,8 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.154, y: 0.6138182, z: -18.964745}
-  m_LocalScale: {x: 0.18713976, y: 0.18713976, z: 0.18713976}
+  m_LocalPosition: {x: 6.019183, y: 3.6035707, z: -36.192856}
+  m_LocalScale: {x: 0.35714284, y: 0.35714284, z: 0.35714284}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1067114361}
@@ -3564,12 +3564,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 20daa800a641d9e4cae18a06630db1ef, type: 3}
+  m_Sprite: {fileID: 846842063, guid: d68bae3ecc45e6b4e96d070a8f0f45ac, type: 3}
   m_Color: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 2.56}
+  m_Size: {x: 1.38, y: 2.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3584,9 +3584,9 @@ Transform:
   m_GameObject: {fileID: 1067114358}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.04, y: 31.82, z: 5.44}
-  m_LocalScale: {x: 5.3436, y: 5.3436, z: 5.3436}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -14.04, y: 25.01, z: 5.44}
+  m_LocalScale: {x: 2.8, y: 2.8, z: 2.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 49530391}
   - {fileID: 330585546}
@@ -3689,8 +3689,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.09822, y: 1.3903385, z: 0.6840098}
-  m_Center: {x: -0.03157123, y: -0.52501154, z: 0.1}
+  m_Size: {x: 1.3893534, y: 2.1328573, z: 1.17}
+  m_Center: {x: 0.012772065, y: -0.01507299, z: 0.16000001}
 --- !u!114 &1067114367
 MonoBehaviour:
   m_ObjectHideFlags: 0
