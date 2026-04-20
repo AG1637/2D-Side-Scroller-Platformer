@@ -9,10 +9,8 @@ public class OpenDoor : MonoBehaviour
     public int requiredEnemies;
 
     public GameObject portal;
-    public GameObject lockedTextCoins;
-    public GameObject lockedTextEnemies;
-    public GameObject unlockedTextCoins;
-    public GameObject unlockedTextEnemies;
+    public GameObject unlockedText;
+    public GameObject lockedText;
 
     private void Start()
     {
@@ -25,7 +23,7 @@ public class OpenDoor : MonoBehaviour
             if(GameManager.instance.coins >= requiredCoins)
             {
                 GameManager.instance.canEnterNextLevel = true;
-                unlockedTextCoins.SetActive(true);
+                unlockedText.SetActive(true);
                 portal.SetActive(true);
             }        
         }
@@ -34,7 +32,7 @@ public class OpenDoor : MonoBehaviour
             if (GameManager.instance.enemiesKilled >= requiredEnemies)
             {
                 GameManager.instance.canEnterNextLevel = true;
-                unlockedTextEnemies.SetActive(true);
+                unlockedText.SetActive(true);
                 portal.SetActive(true);
             }
         }
@@ -47,7 +45,7 @@ public class OpenDoor : MonoBehaviour
             {
                 if (GameManager.instance.coins < requiredCoins)
                 {
-                    lockedTextCoins.SetActive(true);
+                    lockedText.SetActive(true);
                     Invoke("HideText", 5);
                 }
             }
@@ -55,7 +53,7 @@ public class OpenDoor : MonoBehaviour
             {
                 if (GameManager.instance.enemiesKilled < requiredEnemies)
                 {
-                    lockedTextEnemies.SetActive(true);
+                    lockedText.SetActive(true);
                     Invoke("HideText", 5);
                 }
             }
@@ -64,10 +62,8 @@ public class OpenDoor : MonoBehaviour
 
     private void HideText()
     {
-        lockedTextCoins.SetActive(false);
-        lockedTextEnemies.SetActive(false);
-        unlockedTextCoins.SetActive(false);
-        unlockedTextEnemies.SetActive(false);
+        unlockedText.SetActive(false);
+        lockedText.SetActive(false);
     }
 
 }
