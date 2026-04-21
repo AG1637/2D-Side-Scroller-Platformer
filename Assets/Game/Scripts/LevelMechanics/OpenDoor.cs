@@ -6,6 +6,7 @@ public class OpenDoor : MonoBehaviour
     public bool questComplete;
     public bool coins;
     public bool enemies;
+    public bool alreadyChecked;
 
     public int requiredCoins;
     public int requiredEnemies;
@@ -25,19 +26,35 @@ public class OpenDoor : MonoBehaviour
         if(questComplete == true)
         {
             GameManager.instance.canEnterNextLevel = true;
-            unlockedText.SetActive(true);
             portal.SetActive(true);
-            questText.color = new Color(117, 255, 76, 255);
+            questText.color = new Color(0, 1, 0);
+            if (alreadyChecked == false)
+            {
+                alreadyChecked = true;
+                unlockedText.SetActive(true);
+                Invoke("HideText", 5);
+            }
+        }
+        else
+        {
+            questText.color = new Color(1,1,1);
         }
 
-        if (coins == true)
+        if (coins == true && enemies == true)
         {
-            if(GameManager.instance.coins >= requiredCoins)
+            if (GameManager.instance.coins >= requiredCoins && GameManager.instance.enemiesKilled >= requiredEnemies)
             {
                 questComplete = true;
-            }        
+            }
         }
-        else if (enemies == true)
+        else if (coins == true && enemies != true)
+        {
+            if (GameManager.instance.coins >= requiredCoins)
+            {
+                questComplete = true;
+            }
+        }
+        else if (enemies == true && coins != true)
         {
             if (GameManager.instance.enemiesKilled >= requiredEnemies)
             {
