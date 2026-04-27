@@ -53,8 +53,18 @@ public class SceneManager2 : MonoBehaviour
 
     public void ClosePanels()
     {
-        settingsPanel.SetActive(false);
-        levelSelectPanel.SetActive(false);
+        if (settingsPanel != null)
+        {
+            settingsPanel.SetActive(false);
+        }
+        if (helpPanel != null)
+        {
+            helpPanel.SetActive(false);
+        }
+        if (levelSelectPanel != null)
+        {
+            levelSelectPanel.SetActive(false);
+        }
     }
     public void OpenSettings()
     {

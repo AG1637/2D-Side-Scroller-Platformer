@@ -7,7 +7,6 @@ public class PlayerAttack : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
     public AudioClip shootSound;
-    public AudioSource audioSource;
 
     private Animator anim;
     private PlayerMovement playerMovement;
@@ -54,7 +53,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (shootSound != null)
         {
-            audioSource.PlayOneShot(shootSound);
+            SoundManager.instance.PlaySound(shootSound);
         }
     }
 }

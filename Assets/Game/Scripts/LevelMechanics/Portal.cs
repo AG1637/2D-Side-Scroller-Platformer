@@ -6,12 +6,14 @@ using UnityEngine.SceneManagement;
 public class Portal : MonoBehaviour
 {
     [SerializeField] private AudioClip levelCompleteSound;
+    private bool interacting;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !interacting)
         {
             StartCoroutine(CompleteLevel());
+            interacting = true;
         }
     }
 
