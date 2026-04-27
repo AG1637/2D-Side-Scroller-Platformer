@@ -11,6 +11,7 @@ public class OpenDoor : MonoBehaviour
     public int requiredCoins;
     public int requiredEnemies;
 
+    [SerializeField] private AudioClip questCompleteSound;
     public GameObject portal;
     public TextMeshProUGUI questText;
     public GameObject unlockedText;
@@ -32,6 +33,7 @@ public class OpenDoor : MonoBehaviour
             {
                 alreadyChecked = true;
                 unlockedText.SetActive(true);
+                SoundManager.instance.PlaySound(questCompleteSound);
                 Invoke("HideText", 5);
             }
         }

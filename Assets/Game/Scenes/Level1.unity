@@ -5386,6 +5386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   track1: {fileID: 8300000, guid: 8232a0f6273f3b84f8830e5025a9bbc9, type: 3}
   track2: {fileID: 8300000, guid: 6d41021fb03ffc94e926d70fa33cb2a8, type: 3}
+  breathingClip: {fileID: 8300000, guid: 26d1efab93f1a084f9c057c52bce3dea, type: 3}
 --- !u!82 &1043601556
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5399,7 +5400,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.113
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -5828,6 +5829,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpSound: {fileID: 8300000, guid: fa4d05abfb626f547acfb0c4d0e012b9, type: 3}
+  collectibleSound: {fileID: 8300000, guid: dcc7727e54e47784bb4c6f436c46b2b2, type: 3}
+  loseLifeSound: {fileID: 8300000, guid: 9f29fca303fed7444a215015dd0a299e, type: 3}
   footstepSound: {fileID: 8300000, guid: d3ca88fdcdee23d4c8b86cd814745b76, type: 3}
   footstepCooldown: 0.3
   groundLayer:
@@ -11097,6 +11100,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 749986540623971974, guid: c7c9f9dc2645ad14da6e8d01789e4375, type: 3}
+      propertyPath: levelCompleteSound
+      value: 
+      objectReference: {fileID: 8300000, guid: a85fcd1f767880a48ba7e3d1b06e3fdf, type: 3}
     - target: {fileID: 1604419371650584486, guid: c7c9f9dc2645ad14da6e8d01789e4375, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -11197,6 +11204,10 @@ PrefabInstance:
       propertyPath: unlockedTextCoins
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2613488583970608405, guid: c7c9f9dc2645ad14da6e8d01789e4375, type: 3}
+      propertyPath: questCompleteSound
+      value: 
+      objectReference: {fileID: 8300000, guid: dde73464dc3b6cf42bdb599ec45e2267, type: 3}
     - target: {fileID: 2613488583970608405, guid: c7c9f9dc2645ad14da6e8d01789e4375, type: 3}
       propertyPath: unlockedTextEnemies
       value: 

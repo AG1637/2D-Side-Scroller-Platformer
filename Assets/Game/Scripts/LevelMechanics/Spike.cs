@@ -7,6 +7,7 @@ public class Spike : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.instance.playerHealth = 0;
+            SoundManager.instance.PlaySound(PlayerMovement.instance.loseLifeSound);
         }
     }
 }

@@ -7,9 +7,13 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private SpriteRenderer sprite;
     private BoxCollider boxCollider;
+
+    [Header("Audio")]
     [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip collectibleSound;
     [SerializeField] private AudioClip footstepSound;
     [SerializeField] private float footstepCooldown = 0.3f;
+    public AudioClip loseLifeSound;
     private float footstepTimer = 0f;
 
     [SerializeField] private LayerMask groundLayer;
@@ -188,12 +192,14 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Collectible"))
         {
             Destroy(other.gameObject);
-            GameManager.instance.coins ++;
+            SoundManager.instance.PlaySound(collectibleSound);
+            GameManager.instance.coins++;
         }
         if (other.gameObject.CompareTag("Enemy"))
         {
             GameManager.instance.playerHealth--;
             enemyHitText.SetActive(true);
+            SoundManager.instance.PlaySound(loseLifeSound);
             Invoke("HideText", 3);
         }
     }

@@ -4,9 +4,10 @@ public class BackgroundMusic : MonoBehaviour
 {
     public static BackgroundMusic instance { get; private set; }
     private AudioSource musicSource;
-
+    private AudioSource breathingSource;
     [SerializeField] private AudioClip track1;
     [SerializeField] private AudioClip track2;
+    [SerializeField] private AudioClip breathingClip;
 
     private bool playingTrack1 = true;
 
@@ -24,11 +25,20 @@ public class BackgroundMusic : MonoBehaviour
 
         musicSource = GetComponent<AudioSource>();
         musicSource.loop = false;
+
+        breathingSource = gameObject.AddComponent<AudioSource>();
+        breathingSource.loop = true;
     }
 
     private void Start()
     {
         PlayNextTrack();
+
+        if (breathingClip != null)
+        {
+            breathingSource.clip = breathingClip;
+            breathingSource.Play();
+        }
     }
 
     private void Update()
