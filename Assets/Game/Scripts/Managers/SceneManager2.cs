@@ -7,6 +7,8 @@ public class SceneManager2 : MonoBehaviour
     public static SceneManager2 instance;
     [SerializeField] GameObject pausePanel;
     [SerializeField] GameObject helpPanel;
+    [SerializeField] GameObject settingsPanel;
+    [SerializeField] GameObject levelSelectPanel;
     private int index;
 
     private void Awake()
@@ -19,14 +21,11 @@ public class SceneManager2 : MonoBehaviour
         pausePanel.SetActive(true);
         Time.timeScale = 0;
     }
+
     public void Help()
     {
         helpPanel.SetActive(true);
         Time.timeScale = 0;
-    }
-    public void StartGame()
-    {
-        SceneManager.LoadSceneAsync(1);
     }
 
     public void MainMenu()
@@ -52,9 +51,23 @@ public class SceneManager2 : MonoBehaviour
         EditorApplication.ExitPlaymode();
     }
 
+    public void ClosePanels()
+    {
+        settingsPanel.SetActive(false);
+        levelSelectPanel.SetActive(false);
+    }
+    public void OpenSettings()
+    {
+        settingsPanel.SetActive(true);
+    }
+    public void OpenLevelSelect()
+    {
+        levelSelectPanel.SetActive(true);
+    }
     public void LoadNextLevel()
     {
         index = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(index + 1);
     }
+
 }
