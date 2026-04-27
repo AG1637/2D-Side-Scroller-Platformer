@@ -6,7 +6,6 @@ public class PlayerAttack : MonoBehaviour
     public float attackCooldown;
     public Transform firePoint;
     public GameObject bulletPrefab;
-    public GameObject shootEffect;
     public AudioClip shootSound;
     public AudioSource audioSource;
 
@@ -52,11 +51,6 @@ public class PlayerAttack : MonoBehaviour
     {
         // Instantiate a new bullet at the firePoint position
         GameObject newBullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-
-        if (shootEffect != null)
-        {
-            Instantiate(shootEffect, firePoint.position, Quaternion.identity);
-        }
 
         if (shootSound != null)
         {

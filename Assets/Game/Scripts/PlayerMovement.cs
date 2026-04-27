@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private BoxCollider boxCollider;
     [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip footstepSound;
+    [SerializeField] private float footstepCooldown = 0.3f;
+    private float footstepTimer = 0f;
 
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
@@ -76,6 +79,10 @@ public class PlayerMovement : MonoBehaviour
             }
             else
                 coyoteCounter -= Time.deltaTime; //Start decreasing coyote counter when not on the ground
+        }
+        if (horizontalInput != 0 && isGrounded())
+        {
+            PlayFootstepSound();
         }
     }
 
@@ -190,6 +197,17 @@ public class PlayerMovement : MonoBehaviour
             Invoke("HideText", 3);
         }
     }
+
+    private void PlayFootstepSound()
+    {
+        footstepTimer -= Time.deltaTime;
+        if (footstepTimer <= 0)
+        {
+            SoundManager.instance.PlaySound(footstepSound);
+            footstepTimer = footstepCooldown;
+        }
+    }
+
 
     public void HideText()
     {
