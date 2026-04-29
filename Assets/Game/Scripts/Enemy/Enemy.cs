@@ -1,31 +1,79 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
+using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform enemy, pointA, pointB;
+    [Header("Patrol")]
+    public Transform enemy;
+    public Transform pointA;
+    public Transform pointB;
     public float speed;
-    public int maxHealth = 3;
-    public int health = 3;
+    public float waitTime = 2f;    
+    private bool isWaiting = false;
     Vector3 targetPoint;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+
+    [Header("Health")]
+    public int maxHealth = 3;
+    public int health;
 
     private void Start()
     {
         targetPoint = pointB.position;
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        health = maxHealth;
     }
 
     private void Update()
+    {      
+        if (isWaiting) return;
+        MoveToTarget();    
+    }
+
+    public void MoveToTarget()
     {
-        if (Vector2.Distance(enemy.transform.position, pointA.position) < 0.05f)
+        animator.SetBool("isMoving", true);
+        enemy.position = Vector3.MoveTowards(enemy.position,targetPoint,speed * Time.deltaTime);
+        FlipSprite(targetPoint.x);
+
+        if (Vector2.Distance(enemy.position, targetPoint) < 0.05f)
+        {
+            StartCoroutine(WaitBeforeMoving());
+        }
+    }
+
+    public void FlipSprite(float targetX)
+    {
+        if (targetX > enemy.position.x)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else
+        {
+            spriteRenderer.flipX = true;
+        }
+    }
+
+    IEnumerator WaitBeforeMoving()
+    {
+        isWaiting = true;
+        //Play idle animation
+        animator.SetBool("isMoving", false);
+        yield return new WaitForSeconds(waitTime);
+        //Switch target
+        if (targetPoint == pointA.position)
         {
             targetPoint = pointB.position;
         }
-
-        if (Vector2.Distance(enemy.transform.position, pointB.position) < 0.05f)
+        else
         {
             targetPoint = pointA.position;
         }
-
-        enemy.transform.position = Vector3.MoveTowards(enemy.transform.position, targetPoint, speed * Time.deltaTime);
+        isWaiting = false;
     }
 
     public void TakeDamage(int damage)

@@ -1,6 +1,7 @@
-Assets:
-Portal - "Low-poly Portal" (https://skfb.ly/o6Fpr) by Kubox is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
-Bonfire by Quaternius (https://poly.pizza/m/Azj9hJwwwG)
+my Assets:
+Portal -- "Low-poly Portal" (https://skfb.ly/o6Fpr) by Kubox is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+Bonfire by Quaternius -- (https://poly.pizza/m/Azj9hJwwwG)
+platforms -- https://assetstore.unity.com/packages/2d/environments/2d-hand-painted-platformer-environment-227159#description
 
 Sounds:
 Walking in leaves 1.m4a by EpicAllay -- https://freesound.org/s/615083/ -- License: Creative Commons 0
