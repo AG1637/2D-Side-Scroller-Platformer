@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public float gravityScale = 3f;
     public float speed;
     private float horizontalInput;
+    public bool canMove = true;
 
     [Header("Jumping")]
     public float jumpPower;
@@ -51,42 +52,46 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        Vector3 customGravity = Physics.gravity * gravityScale;
-        rb.AddForce(customGravity, ForceMode.Acceleration);
-        movement();
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (canMove == true)
         {
-            Jump();
-        }
-
-        //Adjustable jump height   
-        if ((Input.GetKeyUp(KeyCode.Space) && rb.linearVelocity.y > 0) || (Input.GetKeyUp(KeyCode.W) && rb.linearVelocity.y > 0) || (Input.GetKeyUp(KeyCode.UpArrow) && rb.linearVelocity.y > 0))
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y / 2);
-        }
-
-        if (onWall())
-        {
-            gravityScale = 0;
-            rb.linearVelocity = Vector2.zero;
-        }
-        else
-        {
-            gravityScale = 2f;
-            rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
-
-            if (isGrounded())
+            Vector3 customGravity = Physics.gravity * gravityScale;
+            rb.AddForce(customGravity, ForceMode.Acceleration);
+            movement();
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
-                coyoteCounter = coyoteTime; //Reset coyote counter when on the ground
-                jumpCounter = extraJumps; //Reset jump counter to extra jump value
+                Jump();
+            }
+
+            //Adjustable jump height   
+            if ((Input.GetKeyUp(KeyCode.Space) && rb.linearVelocity.y > 0) || (Input.GetKeyUp(KeyCode.W) && rb.linearVelocity.y > 0) || (Input.GetKeyUp(KeyCode.UpArrow) && rb.linearVelocity.y > 0))
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y / 2);
+            }
+
+            if (onWall())
+            {
+                gravityScale = 0;
+                rb.linearVelocity = Vector2.zero;
             }
             else
-                coyoteCounter -= Time.deltaTime; //Start decreasing coyote counter when not on the ground
+            {
+                gravityScale = 2f;
+                rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
+
+                if (isGrounded())
+                {
+                    coyoteCounter = coyoteTime; //Reset coyote counter when on the ground
+                    jumpCounter = extraJumps; //Reset jump counter to extra jump value
+                }
+                else
+                    coyoteCounter -= Time.deltaTime; //Start decreasing coyote counter when not on the ground
+            }
+            if (horizontalInput != 0 && isGrounded())
+            {
+                PlayFootstepSound();
+            }
         }
-        if (horizontalInput != 0 && isGrounded())
-        {
-            PlayFootstepSound();
-        }
+        
     }
 
     public void movement()
