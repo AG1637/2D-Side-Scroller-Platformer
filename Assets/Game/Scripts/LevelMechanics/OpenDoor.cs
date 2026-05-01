@@ -34,7 +34,6 @@ public class OpenDoor : MonoBehaviour
                 alreadyChecked = true;
                 unlockedText.SetActive(true);
                 SoundManager.instance.PlaySound(questCompleteSound);
-                Invoke("HideText", 5);
             }
         }
         else

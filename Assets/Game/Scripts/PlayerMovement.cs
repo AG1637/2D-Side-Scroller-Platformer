@@ -16,11 +16,10 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip loseLifeSound;
     private float footstepTimer = 0f;
 
+    [Header("Movement")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
-
     public GameObject enemyHitText;
-
     public bool movingLeft;
     public float gravityScale = 3f;
     public float speed;
@@ -73,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            gravityScale = 2.5f;
+            gravityScale = 2f;
             rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
 
             if (isGrounded())
