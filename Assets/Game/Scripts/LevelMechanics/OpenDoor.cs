@@ -33,6 +33,7 @@ public class OpenDoor : MonoBehaviour
             {
                 alreadyChecked = true;
                 unlockedText.SetActive(true);
+                lockedText.SetActive(false);
                 SoundManager.instance.PlaySound(questCompleteSound);
             }
         }
@@ -88,7 +89,6 @@ public class OpenDoor : MonoBehaviour
 
     private void HideText()
     {
-        unlockedText.SetActive(false);
         lockedText.SetActive(false);
     }
 

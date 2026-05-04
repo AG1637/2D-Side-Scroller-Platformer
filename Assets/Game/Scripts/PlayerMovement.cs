@@ -8,6 +8,10 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     private BoxCollider boxCollider;
 
+    public GameObject lifeLostText;
+    public GameObject explanationText;
+    private bool hasShownExplanation = false;
+
     [Header("Audio")]
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip collectibleSound;
@@ -19,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
-    public GameObject enemyHitText;
     public bool movingLeft;
     public float gravityScale = 3f;
     public float speed;
@@ -202,7 +205,13 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             GameManager.instance.playerHealth--;
-            enemyHitText.SetActive(true);
+            lifeLostText.SetActive(true);
+            if(hasShownExplanation == false)
+            {
+                explanationText.SetActive(true);
+                Invoke("HideText", 3);
+                hasShownExplanation = true;
+            }
             SoundManager.instance.PlaySound(loseLifeSound);
             Invoke("HideText", 3);
         }
@@ -221,6 +230,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void HideText()
     {
-        enemyHitText.SetActive(false);
+        lifeLostText.SetActive(false);
+        explanationText.SetActive(false);
     }
 }

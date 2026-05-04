@@ -7,6 +7,7 @@ public class CameraSwitcher : MonoBehaviour
     public GameObject player;
     public GameObject mainCamera;
     public GameObject previewCamera;
+    public int previewDuration;
 
     private void Start()
     {
@@ -17,7 +18,7 @@ public class CameraSwitcher : MonoBehaviour
 
     IEnumerator Preview()
     {
-        yield return new WaitForSeconds(11);
+        yield return new WaitForSeconds(previewDuration);
         mainCamera.SetActive(true);
         previewCamera.SetActive(false);
         player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;

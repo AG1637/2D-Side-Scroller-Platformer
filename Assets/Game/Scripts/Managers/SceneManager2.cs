@@ -19,12 +19,14 @@ public class SceneManager2 : MonoBehaviour
     public void Pause()
     {
         pausePanel.SetActive(true);
+        CameraZoom.instance.panelOpen = true;
         Time.timeScale = 0;
     }
 
     public void Help()
     {
-        helpPanel.SetActive(true);
+        helpPanel.SetActive(true); 
+        CameraZoom.instance.panelOpen = true;
         Time.timeScale = 0;
     }
 
@@ -37,6 +39,7 @@ public class SceneManager2 : MonoBehaviour
     {
         pausePanel.SetActive(false);
         helpPanel.SetActive(false);
+        CameraZoom.instance.panelOpen = false;
         Time.timeScale = 1;
     }
 
@@ -60,6 +63,8 @@ public class SceneManager2 : MonoBehaviour
         if (helpPanel != null)
         {
             helpPanel.SetActive(false);
+            CameraZoom.instance.panelOpen = false;
+            Time.timeScale = 1;
         }
         if (levelSelectPanel != null)
         {
