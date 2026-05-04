@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     public bool movingLeft;
-    public float gravityScale = 3f;
+    public float gravityScale = 7f;
     public float speed;
     private float horizontalInput;
     public bool canMove = true;
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         rb.useGravity = false;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         if (canMove == true)
         {
@@ -78,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                gravityScale = 2f;
+                //gravityScale = 7f;
                 rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
 
                 if (isGrounded())

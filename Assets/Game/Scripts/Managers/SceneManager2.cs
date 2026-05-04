@@ -51,7 +51,7 @@ public class SceneManager2 : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
-        EditorApplication.ExitPlaymode();
+        //EditorApplication.ExitPlaymode();
     }
 
     public void ClosePanels()
