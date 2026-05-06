@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Conveyorbelt : MonoBehaviour
 {
-    [SerializeField] private Vector3 conveyorDirection = Vector3.right; //direction (positive is right, negative is left)
+    [SerializeField] private Vector3 conveyorDirection = Vector3.right;
     [SerializeField] private float conveyorSpeed = 5f;
     [SerializeField] private GameObject arrows;
 
@@ -14,7 +14,10 @@ public class Conveyorbelt : MonoBehaviour
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider>();
-        boxCollider.isTrigger = false;
+        if (boxCollider != null)
+        {
+            boxCollider.isTrigger = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -37,39 +40,22 @@ public class Conveyorbelt : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (conveyorDirection.x < 0)
+        if (arrows != null)
         {
-            arrows.transform.rotation = Quaternion.Euler(0, 180, 0); //arrows point left
+            if (conveyorDirection.x < 0)
+            {
+                arrows.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else if (conveyorDirection.x > 0)
+            {
+                arrows.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
-        else if (conveyorDirection.x > 0)
+
+        if (isPlayerOnBelt && rb != null)
         {
-            arrows.transform.rotation = Quaternion.Euler(0, 0, 0); //arrows point right
-        }
-        
-        if (isPlayerOnBelt && rb != null && playerMovement != null) 
-        { 
-            Vector3 conveyorVelocity = conveyorDirection.normalized * conveyorSpeed;
-            rb.linearVelocity = new Vector3(conveyorVelocity.x, rb.linearVelocity.y, conveyorVelocity.z);
+            Vector3 conveyorForce = conveyorDirection.normalized * conveyorSpeed;
+            rb.AddForce(conveyorForce, ForceMode.VelocityChange);
         }
     }
-
-    /*private void OnDrawGizmos()
-    {
-        if (!showDirection) return;
-
-        BoxCollider col = GetComponent<BoxCollider>();
-        if (col == null) return;
-
-        Vector3 center = transform.position + col.center;
-        Vector3 direction = conveyorDirection.normalized;
-        Vector3 arrowStart = center;
-        Vector3 arrowEnd = center + direction * 2f;
-
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(arrowStart, arrowEnd);
-
-        // Draw arrow head
-        Gizmos.DrawLine(arrowEnd, arrowEnd - direction * 0.3f + Vector3.up * 0.2f);
-        Gizmos.DrawLine(arrowEnd, arrowEnd - direction * 0.3f - Vector3.up * 0.2f);
-    }*/
 }

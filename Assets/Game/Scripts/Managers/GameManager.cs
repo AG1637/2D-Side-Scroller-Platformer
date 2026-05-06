@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public int playerHealth = 3;
     private float levelStartTime;
+    private float pausedTime = 0f; 
     private bool timerActive = false;
     public int coins;
     public int enemiesKilled;
@@ -35,8 +36,11 @@ public class GameManager : MonoBehaviour
 
     public void StartTimer()
     {
-        levelStartTime = Time.time;
-        timerActive = true;
+        if (!timerActive)
+        {
+            levelStartTime = Time.time - pausedTime; 
+            timerActive = true;
+        }
     }
 
     public float GetLevelTime()
@@ -45,17 +49,25 @@ public class GameManager : MonoBehaviour
         {
             return Time.time - levelStartTime;
         }
-        return 0f;
+        return pausedTime; 
     }
 
     public void PauseTimer()
     {
-        timerActive = false;
+        if (timerActive)
+        {
+            pausedTime = Time.time - levelStartTime; 
+            timerActive = false;
+        }
     }
 
     public void ResumeTimer()
     {
-        timerActive = true;
+        if (!timerActive)
+        {
+            levelStartTime = Time.time - pausedTime; 
+            timerActive = true;
+        }
     }
 }
 

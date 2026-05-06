@@ -129,7 +129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 610283984477369408, guid: 2922eda6d68088b40903f5a5e6aa6f77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.72
+      value: 12.23
       objectReference: {fileID: 0}
     - target: {fileID: 5030326300639663006, guid: 2922eda6d68088b40903f5a5e6aa6f77, type: 3}
       propertyPath: m_Name
@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5037559944395019859, guid: 2922eda6d68088b40903f5a5e6aa6f77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.51
+      value: -10.495
       objectReference: {fileID: 0}
     - target: {fileID: 5662555000101032932, guid: 2922eda6d68088b40903f5a5e6aa6f77, type: 3}
       propertyPath: m_LocalScale.x
@@ -6533,7 +6533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2423476530615193194, guid: c6cc8a28e6242c7499bde2fac60a3606, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.4
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 2423476530615193194, guid: c6cc8a28e6242c7499bde2fac60a3606, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7753,7 +7753,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 610283984477369408, guid: 2922eda6d68088b40903f5a5e6aa6f77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.78
+      value: 7.42
       objectReference: {fileID: 0}
     - target: {fileID: 5030326300639663006, guid: 2922eda6d68088b40903f5a5e6aa6f77, type: 3}
       propertyPath: m_Name
@@ -7761,7 +7761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5037559944395019859, guid: 2922eda6d68088b40903f5a5e6aa6f77, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.31
+      value: -1.52
       objectReference: {fileID: 0}
     - target: {fileID: 5662555000101032932, guid: 2922eda6d68088b40903f5a5e6aa6f77, type: 3}
       propertyPath: m_LocalScale.x
@@ -9209,7 +9209,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7821502092957392051, guid: 4b9a7fea97ad6384bbbeedb8ba659312, type: 3}
       propertyPath: conveyorSpeed
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11476,7 +11476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 33.9
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17690,19 +17690,22 @@ MonoBehaviour:
     the portal
 
 
+    A and D or Arrow Keys to move
+
     Space - Jump
 
-    Scroll Wheel - Zoom
+    Scroll
+    Wheel - Zoom
 
     Blue - Moving Platform
 
-    Yellow
-    - Conveyor Platform
+    Yellow - Conveyor Platform
 
-    Pink - Disappearing Platform
+    Pink
+    - Disappearing Platform
 
-    Red Spikes will kill
-    you instantly if you touch them
+    Red Spikes will kill you instantly if you touch
+    them
 
 '
   m_isRightToLeft: 0
@@ -17731,8 +17734,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -18248,7 +18251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1860298309512694147, guid: 9ae67d9dd1f087e4cbca7e52cb4030ca, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 676.3
+      value: 674.94
       objectReference: {fileID: 0}
     - target: {fileID: 1860298309512694147, guid: 9ae67d9dd1f087e4cbca7e52cb4030ca, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18592,7 +18595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7640821492799476630, guid: d48b56a369adc3445a3536d5233a48e9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.5
+      value: 10.2
       objectReference: {fileID: 0}
     - target: {fileID: 7640821492799476630, guid: d48b56a369adc3445a3536d5233a48e9, type: 3}
       propertyPath: m_LocalPosition.z

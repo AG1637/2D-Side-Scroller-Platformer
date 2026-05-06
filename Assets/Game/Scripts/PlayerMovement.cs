@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) //|| Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (coyoteCounter > 0 || jumpCounter > 0 || isGrounded())
             {
@@ -76,18 +76,17 @@ public class PlayerMovement : MonoBehaviour
             if (jumpInputPressed)
             {
                 Jump();
-                //Debug.Log("Jumped");
-                jumpInputPressed = false;  // Consume the input
+                jumpInputPressed = false;
             }
 
             if (isGrounded())
             {
-                coyoteCounter = coyoteTime; //Reset coyote counter when on the ground
-                jumpCounter = extraJumps; //Reset jump counter to extra jump value
-                hasJumped = false; // Reset jump flag when grounded
+                coyoteCounter = coyoteTime; 
+                jumpCounter = extraJumps;
+                hasJumped = false; 
             }
             else
-                coyoteCounter -= Time.fixedDeltaTime; //Start decreasing coyote counter when not on the ground
+                coyoteCounter -= Time.fixedDeltaTime;
 
             if (horizontalInput != 0 && isGrounded())
             {
@@ -101,7 +100,8 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         //changes the direction the player is facing
-        if (horizontalInput > 0.01f) // Facing right
+
+        if (horizontalInput > 0.01f) //Facing right
         {
             movingLeft = false;
             sprite.flipX = false;
@@ -120,18 +120,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        // Prevent jump spam - only jump once per key press
         if (hasJumped)
+        {
             return;
+        }
 
-        // Check if we can jump
-        if (coyoteCounter > 0) // Can jump from ground or coyote time
+        if (coyoteCounter > 0)
         {
             PerformJump();
-            coyoteCounter = 0; // Use up coyote time
+            coyoteCounter = 0;
             hasJumped = true;
         }
-        else if (jumpCounter > 0) // Can do extra jump
+        else if (jumpCounter > 0)
         {
             PerformJump();
             jumpCounter--;

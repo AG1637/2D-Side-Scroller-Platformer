@@ -19,15 +19,21 @@ public class SceneManager2 : MonoBehaviour
     public void Pause()
     {
         pausePanel.SetActive(true);
-        CameraZoom.instance.panelOpen = true;
+        if (CameraZoom.instance != null)
+        {
+            CameraZoom.instance.panelOpen = true;
+        }
         GameManager.instance.PauseTimer();
         Time.timeScale = 0;
     }
 
     public void Help()
     {
-        helpPanel.SetActive(true); 
-        CameraZoom.instance.panelOpen = true;
+        helpPanel.SetActive(true);
+        if (CameraZoom.instance != null)
+        {
+            CameraZoom.instance.panelOpen = true;
+        }
         GameManager.instance.PauseTimer();
         Time.timeScale = 0;
     }
@@ -41,7 +47,10 @@ public class SceneManager2 : MonoBehaviour
     {
         pausePanel.SetActive(false);
         helpPanel.SetActive(false);
-        CameraZoom.instance.panelOpen = false;
+        if (CameraZoom.instance != null)
+        {
+            CameraZoom.instance.panelOpen = false;
+        }
         GameManager.instance.ResumeTimer();
         Time.timeScale = 1;
     }
@@ -66,7 +75,11 @@ public class SceneManager2 : MonoBehaviour
         if (helpPanel != null)
         {
             helpPanel.SetActive(false);
-            CameraZoom.instance.panelOpen = false;
+            if (CameraZoom.instance != null)
+            {
+                CameraZoom.instance.panelOpen = false;
+            }
+            GameManager.instance.ResumeTimer();
             Time.timeScale = 1;
         }
         if (levelSelectPanel != null)
@@ -74,18 +87,20 @@ public class SceneManager2 : MonoBehaviour
             levelSelectPanel.SetActive(false);
         }
     }
+
     public void OpenSettings()
     {
         settingsPanel.SetActive(true);
     }
+
     public void OpenLevelSelect()
     {
         levelSelectPanel.SetActive(true);
     }
+
     public void LoadNextLevel()
     {
         index = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(index + 1);
     }
-
 }

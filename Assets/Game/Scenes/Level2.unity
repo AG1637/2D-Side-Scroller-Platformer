@@ -1027,11 +1027,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.9
+      value: 15.4
       objectReference: {fileID: 0}
     - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 40.9
+      value: 36.2
       objectReference: {fileID: 0}
     - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4674,6 +4674,72 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &718237861
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1530131851}
+    m_Modifications:
+    - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2722476
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 235
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 33.78329
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2797507030010981557, guid: ed718c365a292f04387f7778312b8454, type: 3}
+      propertyPath: m_Name
+      value: City Platform (13)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ed718c365a292f04387f7778312b8454, type: 3}
+--- !u!4 &718237862 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2423476530615193194, guid: ed718c365a292f04387f7778312b8454, type: 3}
+  m_PrefabInstance: {fileID: 718237861}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &727466453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8543,6 +8609,7 @@ Transform:
   - {fileID: 1787710591}
   - {fileID: 1827347425}
   - {fileID: 603919651}
+  - {fileID: 718237862}
   - {fileID: 1839143913}
   - {fileID: 1919869492}
   - {fileID: 913780085}
@@ -11510,16 +11577,19 @@ MonoBehaviour:
     the portal
 
 
+    A and D or Arrow Keys to move
+
     Space - Jump
 
-    Scroll Wheel - Zoom
+    Scroll
+    Wheel - Zoom
 
     Blue - Moving Platform
 
-    Yellow
-    - Conveyor Platform
+    Yellow - Conveyor Platform
 
-    Red Spikes will kill you instantly if you touch them'
+    Red
+    Spikes will kill you instantly if you touch them'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11546,8 +11616,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 19
+  m_fontSizeBase: 19
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

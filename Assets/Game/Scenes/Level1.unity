@@ -4549,8 +4549,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -32.84, y: -2.96}
-  m_SizeDelta: {x: 539.4197, y: 164.655}
+  m_AnchoredPosition: {x: -35.9, y: -7.59}
+  m_SizeDelta: {x: 691.9429, y: 213.9237}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &630314177
 MonoBehaviour:
@@ -7883,7 +7883,7 @@ Transform:
   m_GameObject: {fileID: 1067114358}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -35.5, y: 9.3, z: 5.44}
+  m_LocalPosition: {x: -38.17, y: 8.19, z: 5.44}
   m_LocalScale: {x: 4.5227003, y: 4.5227003, z: 4.5227003}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -9980,7 +9980,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Use the mouse scroll wheel to zoom in and out
+  m_text: 'Use the mouse scroll wheel to zoom in and out.
+
+    Use A and D or Arrow
+    Keys to move'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14627,15 +14630,17 @@ MonoBehaviour:
   m_text: 'Complete the quest by collecting coins to unlock the portal
 
 
-    Space
-    - Jump
+    A and
+    D or Arrow Keys to move
+
+    Space - Jump
 
     Scroll Wheel - Zoom
 
-    Blue - Moving Platform
+    Blue
+    - Moving Platform
 
-    Red Spikes will
-    kill you instantly if you touch them
+    Red Spikes will kill you instantly if you touch them
 
 '
   m_isRightToLeft: 0
@@ -14664,8 +14669,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 19
+  m_fontSizeBase: 19
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -15773,7 +15778,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This is a normal platform - Press space to jump on it
+  m_text: This is a normal platform - Press space, W or the up arrow to jump on it
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
