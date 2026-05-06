@@ -24,18 +24,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     public bool movingLeft;
-    public float gravityScale = 7f;
+    public float gravityScale = 10f;
     public float speed;
     private float horizontalInput;
     public bool canMove = true;
 
     [Header("Jumping")]
-    public float jumpPower;
+    public float jumpPower = 55f;
     public bool onGround;
-    [SerializeField] private float coyoteTime;
+    [SerializeField] private float coyoteTime = 0.1f;
     private float coyoteCounter;
-    [SerializeField] private int extraJumps;
+    [SerializeField] private int extraJumps = 1;
     private int jumpCounter;
+    private bool hasJumped = false;
+    private bool jumpInputPressed = false;
 
     private void Awake()
     {
@@ -45,8 +47,24 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
         sprite = GetComponent<SpriteRenderer>();
+        gravityScale = 10f;
+        jumpPower = 55f;
         rb.useGravity = false;
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) //|| Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (coyoteCounter > 0 || jumpCounter > 0 || isGrounded())
+            {
+                jumpInputPressed = true;
+                animator.SetTrigger("jump");
+            }
+        }
+    }
+
+
     private void FixedUpdate()
     {
         if (canMove == true)
@@ -54,33 +72,29 @@ public class PlayerMovement : MonoBehaviour
             Vector3 customGravity = Physics.gravity * gravityScale;
             rb.AddForce(customGravity, ForceMode.Acceleration);
             movement();
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+
+            if (jumpInputPressed)
             {
                 Jump();
+                //Debug.Log("Jumped");
+                jumpInputPressed = false;  // Consume the input
             }
-
-            //Adjustable jump height   
-            if ((Input.GetKeyUp(KeyCode.Space) && rb.linearVelocity.y > 0) || (Input.GetKeyUp(KeyCode.W) && rb.linearVelocity.y > 0) || (Input.GetKeyUp(KeyCode.UpArrow) && rb.linearVelocity.y > 0))
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y / 2);
-            }
-
-            //rb.linearVelocity = new Vector2(horizontalInput * speed, rb.linearVelocity.y);
 
             if (isGrounded())
             {
                 coyoteCounter = coyoteTime; //Reset coyote counter when on the ground
                 jumpCounter = extraJumps; //Reset jump counter to extra jump value
+                hasJumped = false; // Reset jump flag when grounded
             }
             else
-                coyoteCounter -= Time.deltaTime; //Start decreasing coyote counter when not on the ground
-            
+                coyoteCounter -= Time.fixedDeltaTime; //Start decreasing coyote counter when not on the ground
+
             if (horizontalInput != 0 && isGrounded())
             {
                 PlayFootstepSound();
             }
         }
-        
+
     }
 
     public void movement()
@@ -106,34 +120,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        if (coyoteCounter <= 0 && jumpCounter <= 0)
-        {
+        // Prevent jump spam - only jump once per key press
+        if (hasJumped)
             return;
-        }
 
+        // Check if we can jump
+        if (coyoteCounter > 0) // Can jump from ground or coyote time
+        {
+            PerformJump();
+            coyoteCounter = 0; // Use up coyote time
+            hasJumped = true;
+        }
+        else if (jumpCounter > 0) // Can do extra jump
+        {
+            PerformJump();
+            jumpCounter--;
+            hasJumped = true;
+        }
+    }
+
+    private void PerformJump()
+    {
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
         SoundManager.instance.PlaySound(jumpSound);
-
-        if (isGrounded())
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-        }
-        else
-        {
-            //if not on the ground and coyote counter bigger than 0 do a normal jump
-                if (coyoteCounter > 0)
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-            else
-            {
-                if (jumpCounter > 0) //if we have extra jumps then jump and decrease the jump counter
-                {
-                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpPower);
-                    jumpCounter--;
-                }
-            }
-        }
-
-        coyoteCounter = 0;
-
     }
 
     private bool isGrounded()
@@ -162,7 +171,7 @@ public class PlayerMovement : MonoBehaviour
         {
             GameManager.instance.playerHealth--;
             lifeLostText.SetActive(true);
-            if(hasShownExplanation == false)
+            if (hasShownExplanation == false)
             {
                 explanationText.SetActive(true);
                 Invoke("HideText", 3);
@@ -189,3 +198,4 @@ public class PlayerMovement : MonoBehaviour
         explanationText.SetActive(false);
     }
 }
+

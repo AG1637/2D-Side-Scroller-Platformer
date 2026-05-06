@@ -20,6 +20,7 @@ public class SceneManager2 : MonoBehaviour
     {
         pausePanel.SetActive(true);
         CameraZoom.instance.panelOpen = true;
+        GameManager.instance.PauseTimer();
         Time.timeScale = 0;
     }
 
@@ -27,6 +28,7 @@ public class SceneManager2 : MonoBehaviour
     {
         helpPanel.SetActive(true); 
         CameraZoom.instance.panelOpen = true;
+        GameManager.instance.PauseTimer();
         Time.timeScale = 0;
     }
 
@@ -40,6 +42,7 @@ public class SceneManager2 : MonoBehaviour
         pausePanel.SetActive(false);
         helpPanel.SetActive(false);
         CameraZoom.instance.panelOpen = false;
+        GameManager.instance.ResumeTimer();
         Time.timeScale = 1;
     }
 
